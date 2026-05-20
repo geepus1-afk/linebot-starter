@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 LINE_CHANNEL_SECRET = '720ec910eb066df4b6c88428b4ce2ab8'          # ← 貼在這裡
 LINE_CHANNEL_ACCESS_TOKEN = 'hvMa5fFml7Woa0TD3MiyDCBBhAqV5onqHsoIJt65f+NRjU5P3IPmjgfxF55QmFDAve97J+V/wc0o++hn/RtUxUDpP4VgpNsXyUdXfNpKIEG0OKYy/hjn8E+pIfSLupohHtQnaTVQ4AyjvxoztY20zwdB04t89/1O/w1cDnyilFU=v'   # ← 貼在這裡
-GEMINI_API_KEY = '請貼上你的 Gemini API Key'               # ← 貼在這裡
+
 
 # =====================================================
 

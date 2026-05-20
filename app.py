@@ -10,8 +10,9 @@ app = Flask(__name__)
 # ★ 請在下方三個地方貼上你的金鑰 ★
 # =====================================================
 
-LINE_CHANNEL_SECRET = '720ec910eb066df4b6c88428b4ce2ab8'          # ← 貼在這裡
-LINE_CHANNEL_ACCESS_TOKEN = 'hvMa5fFml7Woa0TD3MiyDCBBhAqV5onqHsoIJt65f+NRjU5P3IPmjgfxF55QmFDAve97J+V/wc0o++hn/RtUxUDpP4VgpNsXyUdXfNpKIEG0OKYy/hjn8E+pIfSLupohHtQnaTVQ4AyjvxoztY20zwdB04t89/1O/w1cDnyilFU=v'   # ← 貼在這裡
+LINE_CHANNEL_SECRET = '76c6cef43f5824e4db29fee910099329'          # ← 貼在這裡
+LINE_CHANNEL_ACCESS_TOKEN = 'cmfkifhR7yxF9FuwSDOZu9e0oXCMYrw0I4aq3U2SVXEPgJDZTK6sJgn0wYfJjt4Yve97J+V/wc0o++hn/RtUxUDpP4VgpNsXyUdXfNpKIEE1p2Tn9nLjbjVtgiHNS7PmfVYmDgt37zbZ1k2lPCT0NQdB04t89/1O/w1cDnyilFU='   # ← 貼在這裡
+GEMINI_API_KEY = 'AIzaSyDx-mQt23CCL9kvOxhhLHyGq2kSg8jRW-8'           # ← 這裡
 
 
 # =====================================================

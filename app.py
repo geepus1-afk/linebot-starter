@@ -82,7 +82,7 @@ def log_to_sheets(user_msg, bot_reply):
         print(f'試算表寫入失敗: {e}')
         traceback.print_exc()
 
-@app.route("/webhook", formats=["POST"])
+@app.route("/webhook", methods=["POST"])
 def callback():
     signature = request.headers['X-Line-Signature']
     body = request.get_data(as_text=True)

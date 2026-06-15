@@ -8,7 +8,6 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 import google.generativeai as genai
 from google.oauth2.service_account import Credentials
-from google.api_core.client_options import ClientOptions
 
 app = Flask(__name__)
 
@@ -38,11 +37,8 @@ SYSTEM_PROMPT = """
 請全程使用繁體中文（台灣）回答，語氣必須充滿耐心、多使用鼓勵的表情符號（如 😊、✨、📝）。
 """
 
-# 呼叫新版 Gemini 模型並注入 System Instruction
-model = genai.GenerativeModel(
-    model_name='gemini-1.5-flash',
-    system_instruction=SYSTEM_PROMPT
-)
+# 💡 終極解法：改用最通用、最穩定的 gemini-pro 模型
+model = genai.GenerativeModel(model_name='gemini-pro')
 
 def get_sheets_service():
     try:
@@ -51,7 +47,6 @@ def get_sheets_service():
             creds_info,
             scopes=['https://www.googleapis.com/auth/spreadsheets']
         )
-        # 修正新版 Google API 在某些伺服器上的認證連線問題
         from googleapiclient.discovery import build
         service = build('sheets', 'v4', credentials=creds, cache_discovery=False)
         return service
@@ -70,7 +65,7 @@ def log_to_sheets(user_msg, bot_reply):
         values = [[now, user_msg, bot_reply]]
         body = {'values': values}
         
-        # 寫入指定的試算表與「工作表1」分頁
+        # 寫入指定的試算表與「工作表1」分頁 (錯字已徹底修正)
         service.spreadsheets().values().append(
             spreadsheetId=SPREADSHEET_ID,
             range='工作表1!A:C',
@@ -96,14 +91,17 @@ def callback():
 def handle_message(event):
     user_message = event.message.text
     try:
-        # 讓 Gemini 根據筆記大腦生成回應
-        response = model.generate_content(user_message)
+        # 💡 終極解法：在程式內部把「助教指令」跟「學生筆記」偷偷黏在一起，一次送給 AI
+        combined_prompt = f"{SYSTEM_PROMPT}\n\n【以下是學生的筆記內容】：\n{user_message}"
+        
+        # 讓 Gemini 生成回應
+        response = model.generate_content(combined_prompt)
         reply_text = response.text
     except Exception as e:
         print(f"Gemini 生成失敗: {e}")
         reply_text = "抱歉，助教的大腦開小差了，請再傳一次筆記給試試看！"
 
-    # 將紀錄同步進 Google 試算表
+    # 將紀錄同步進 Google 試算表（維持紀錄學生原本的話）
     log_to_sheets(user_message, reply_text)
     
     # 回傳給 LINE 使用者

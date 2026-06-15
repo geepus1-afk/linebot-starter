@@ -74,7 +74,7 @@ def log_to_sheets(user_msg, bot_reply):
         service.spreadsheets().values().append(
             spreadsheetId=SPREADSHEET_ID,
             range='工作表1!A:C',
-            valueInputOption='USER_ENTERRED',
+            valueInputOption='USER_ENTERED',
             body=body
         ).execute()
         print("對話紀錄成功自動寫入試算表！")

@@ -38,7 +38,7 @@ SYSTEM_PROMPT = """
 """
 
 # 💡 終極解法：改用最通用、最穩定的 gemini-pro 模型
-model = genai.GenerativeModel(model_name='gemini-pro')
+model = genai.GenerativeModel(model_name='gemini-2.5-flash')
 
 def get_sheets_service():
     try:
